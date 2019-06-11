@@ -43,6 +43,36 @@ namespace {
         }
     }
 
+    TEST(BOARD, DETERMINE_CTR) {
+        std::default_random_engine gen;
+        std::uniform_int_distribution<int> dis(1, 3);
+        uint8_t istat[33];
+        std::string str = "kggmmrrnnccpppppPPPPPCCNNRRMMGGK";
+        uint32_t dark, alive, tmp;
+        for(int t = 0; t < 50; t++){
+            for(int i = 0; i < 32; i++){
+                tmp = 0x1 << i;
+                istat[i] = dis(gen);
+                if(istat[i] == 1){
+                    dark |= tmp;
+                    alive &= ~tmp;
+                }
+                else if(istat[i] == 2){
+                    alive |= tmp;
+                    dark &= ~tmp;
+                }
+                else{
+                    alive &= ~tmp;
+                    dark &= ~tmp;
+                }
+            }
+            Board obj(str, dark, alive);
+            for(int i = 0; i < 32; i++){
+                EXPECT_EQ(istat[i], obj.chs[i].stat);
+            }
+        }
+    }
+
     TEST(BOARD, UNIQUENESS) {
         Board obj[2];
         EXPECT_FALSE(std::equal(obj[0].chs, obj[0].chs+32, obj[1].chs));

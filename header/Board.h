@@ -17,6 +17,7 @@ class Board{
     public:
         Board();
         Board(std::string);
+        Board(std::string, uint32_t, uint32_t);
     
        	Chess chs[32];
 };
