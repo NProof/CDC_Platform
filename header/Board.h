@@ -2,6 +2,7 @@
 #define BOARD_H_
 
 #include <cinttypes>
+#include <string>
 
 struct Chess{
     uint8_t stat:2; // 0:unknown, 1:dark, 2:alive, 3:out_board 
@@ -15,6 +16,7 @@ struct Chess{
 class Board{
     public:
         Board();
+        Board(std::string);
     
        	Chess chs[32];
 };

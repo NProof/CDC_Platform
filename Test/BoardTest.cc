@@ -1,6 +1,7 @@
 #include <limits.h>
 #include "../header/Board.h"
 #include "gtest/gtest.h"
+#include <algorithm>
 
 namespace {
     TEST(BOARD, CONSTRCTOR) {
@@ -27,6 +28,18 @@ namespace {
             EXPECT_EQ(2, types[12]);
             EXPECT_EQ(2, types[13]);
             EXPECT_EQ(1, types[14]);
+        }
+    }
+
+    TEST(BOARD, STR_CONSTRCTOR) {
+        std::string str = "kggmmrrnnccpppppKGMRNCPGMRNCPPPP";
+        for(int t = 0; t < 50; t++){
+            std::random_shuffle(str.begin(), str.end());
+            Board obj(str);
+            for(int i = 0; i < 32; i++){
+                EXPECT_EQ(1, obj.chs[i].stat);
+                EXPECT_EQ(str[i], "XkgmrncpPCNRMGK-"[obj.chs[i].type]);
+            }
         }
     }
 

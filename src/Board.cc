@@ -1,6 +1,7 @@
 #include "../header/Board.h"
-#include <cinttypes>
+
 #include <algorithm>
+#include <map>
 
 bool Chess::operator==(const Chess &str) const{
     return this->type == str.type;
@@ -12,5 +13,16 @@ Board::Board(){
     for(int i = 0; i < 32; i++){
         this->chs[i].stat = 1;
         this->chs[i].type = itype[i];
+    }
+}
+
+Board::Board(std::string str){
+    std::map<char, uint8_t> m = {
+        {'X',0}, {'k',1}, {'g',2}, {'m',3}, {'r',4}, {'n',5}, {'c',6}, {'p',7}, 
+        {'P',8}, {'C',9}, {'N',10}, {'R',11}, {'M',12}, {'G',13}, {'K',14}, {'-',15}
+    };
+    for(int i = 0; i < 32; i++){
+        this->chs[i].stat = 1;
+        this->chs[i].type = m.at(str[i]);
     }
 }
