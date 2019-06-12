@@ -60,4 +60,6 @@ bool boom(int x,int y,Board board){ // 這裡你把 int chess[] 改成 Board & board
     }else return false;
 }*/
 
+bool momentum(int type, int type_opp); // 判斷兩旗子可不可以產生吃的行為
+
 #endif
