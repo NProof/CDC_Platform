@@ -77,4 +77,14 @@ namespace {
         Board obj[2];
         EXPECT_FALSE(std::equal(obj[0].chs, obj[0].chs+32, obj[1].chs));
     }
+
+    TEST(CONFIG, INSTANCE) {
+        const SpaceConfig * ptr_0 = SpaceConfig::getInstance(0);
+        const SpaceConfig * ptr_1 = SpaceConfig::getInstance(1);
+        EXPECT_EQ(8, ptr_0->getMajor());
+        EXPECT_EQ(4, ptr_0->getMinor());
+        EXPECT_EQ(4, ptr_1->getMajor());
+        EXPECT_EQ(8, ptr_1->getMinor());
+
+    }
 }

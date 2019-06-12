@@ -13,12 +13,29 @@ struct Chess{
     bool operator==(const Chess &) const;
 };
 
+class SpaceConfig{
+    public:
+        static const SpaceConfig * getInstance(int index){
+            static const SpaceConfig storage[2] = {SpaceConfig(8,4), SpaceConfig(4,8)};
+            return storage + index;
+        }
+
+        uint8_t getMajor() const {return _major;}
+        uint8_t getMinor() const {return _minor;}
+
+    private:
+        SpaceConfig(uint8_t major, uint8_t minor): _major(major), _minor(minor){}
+    uint8_t _major:4;
+    uint8_t _minor:4;
+};
+
 class Board{
     public:
         Board();
         Board(std::string);
         Board(std::string, uint32_t, uint32_t);
-    
+        
+        SpaceConfig const * cfg_spa;
        	Chess chs[32];
 };
 
