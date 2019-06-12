@@ -3,6 +3,8 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 
+using namespace std;
+
 namespace {
     TEST(BOARD, CONSTRCTOR) {
         for(int t = 0; t < 50; t++){
@@ -86,5 +88,58 @@ namespace {
         EXPECT_EQ(4, ptr_1->getMajor());
         EXPECT_EQ(8, ptr_1->getMinor());
 
+    }
+
+ //  1 2 3 4 5 6 7 8 
+
+    TEST(FUN, NEIGHBOR) {
+        /*
+        for(int i=0; i<8; i++){
+            EXPECT_TRUE(neighbor(4*i, 1+4*i));
+            EXPECT_TRUE(neighbor(1+4*i, 2+4*i));
+            EXPECT_TRUE(neighbor(2+4*i, 3+4*i));
+        }
+        for(int j=0; j<4; j++){
+            EXPECT_TRUE(neighbor(j, 4+j));
+            EXPECT_TRUE(neighbor(4+j, 8+j));
+            EXPECT_TRUE(neighbor(8+j, 12+j));
+            EXPECT_TRUE(neighbor(12+j, 16+j));
+            EXPECT_TRUE(neighbor(16+j, 20+j));
+            EXPECT_TRUE(neighbor(20+j, 24+j));
+            EXPECT_TRUE(neighbor(24+j, 28+j));
+        }*/
+        
+        set<set<int> > truepair;
+        int pair[3];
+        for(int i=0; i<8; i++){
+            pair[0] = i; pair[1] = 8+i;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 8+i; pair[1] = 16+i;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 16+i; pair[1] = 24+i;
+            truepair.insert(set<int>(pair, pair+2));
+        }
+        for(int j=0; j<4; j++){
+            pair[0] = 0+8*j; pair[1] = 1+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 1+8*j; pair[1] = 2+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 2+8*j; pair[1] = 3+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 3+8*j; pair[1] = 4+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 4+8*j; pair[1] = 5+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 5+8*j; pair[1] = 6+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+            pair[0] = 6+8*j; pair[1] = 7+8*j;
+            truepair.insert(set<int>(pair, pair+2));
+        }
+        for(int i = 0; i < 32; i++){
+            for(int j = 0 ; j < 32; j++) {
+                pair[0] = i; pair[1] = j;
+                EXPECT_EQ(truepair.count(set<int>(pair, pair+2)), neighbor(i, j));
+            }
+        }
     }
 }

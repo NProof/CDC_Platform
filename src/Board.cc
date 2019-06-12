@@ -40,3 +40,18 @@ Board::Board(std::string str, uint32_t dark, uint32_t alive){
     }
 }
 
+bool neighbor(int x,int y){
+    int tem;
+    if(y>x){
+        tem = y;
+        y = x;
+        x = tem; 
+    }
+    if(x-y==1&&x%8!=0){
+        return true;
+    }
+    else if(x-y==8){
+        return true;
+    }else return false;   
+}
+

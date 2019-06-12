@@ -39,4 +39,22 @@ class Board{
        	Chess chs[32];
 };
 
+bool neighbor(int, int);
+
+/*
+bool boom(int x,int y,Board chess[]){ // 這裡你把 int chess[] 改成 Board & board
+    int tem;
+    if(y>x){
+        tem = y;
+        y = x;
+        x = tem; 
+    }
+    if(x-y==2&&x%8!=0&&(x-1)%8!=0&&chess[x-1]==1){
+        return true;
+    }
+    else if(x-y==16){
+        return true;
+    }else return false;
+}*/
+
 #endif
