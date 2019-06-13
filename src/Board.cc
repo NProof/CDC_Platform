@@ -55,3 +55,35 @@ bool neighbor(int x,int y){
     }else return false;   
 }
 
+bool boom(int x,int y,Board board){ // 這裡你把 int chess[] 改成 Board & board
+    int tem;
+
+    if(y>x){
+        tem = y;
+        y = x;
+        x = tem; 
+    }
+    if(x-y==2&&x%8!=0&&(x-1)%8!=0&&board.chs[x-1].stat!=3){
+        return true;
+    }
+    else if(x-y==16&&board.chs[x-8].stat!=3){
+        return true;
+    }else return false;
+}
+
+bool momentum(int type, int type_opp) // 判斷兩旗子可不可以產生吃的行為
+{
+    if((type>7&&type_opp>7)||(type<8&&type_opp<8)){
+        return false;
+    }
+    else if((type==8&&type_opp==1)||(type==7&&type_opp==14)){
+        return true;
+    }
+    else if(type<8&&(15-type_opp)>=type){
+        return true;
+    }
+    else if(type>7&&(15-type_opp)<=type){
+        return true;
+    }
+    else return false;
+}

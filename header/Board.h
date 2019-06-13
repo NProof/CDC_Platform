@@ -48,7 +48,7 @@ class Board{
         // [(3) 0,(2) 0] reverse alive to src
         // [(3)-1,(2) 0] reverse alive + (opp's type) to src
         // [(2) 0,(2)-1] reverse alive became dark
-        Instruction & ins_gen(src, dst);
+        // Instruction & ins_gen(src, dst);
 
         //pick_up(src, dif);
         //pick_dn(dif, dst);
@@ -62,24 +62,7 @@ class Board{
 };
 
 bool neighbor(int, int);
-
-/*
-bool boom(int x,int y,Board board){ // 這裡你把 int chess[] 改成 Board & board
-    int tem;
-
-    if(y>x){
-        tem = y;
-        y = x;
-        x = tem; 
-    }
-    if(x-y==2&&x%8!=0&&(x-1)%8!=0&&board.chs[x-1].stat!=3){
-        return true;
-    }
-    else if(x-y==16&&board.chs[x-8].stat!=3){
-        return true;
-    }else return false;
-}*/
-
+bool boom(int x,int y,Board board); // 這裡你把 int chess[] 改成 Board & board
 bool momentum(int type, int type_opp); // 判斷兩旗子可不可以產生吃的行為
 
 #endif
