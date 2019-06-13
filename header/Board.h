@@ -20,6 +20,8 @@ struct Chess{
                     //   1    2    3    4     5     6    7   14   13   12   11  10   9    8
     uint8_t :0;
 
+    bool momentum(int type, int type_opp); // 判斷兩旗子可不可以產生吃的行為
+
     bool operator==(const Chess &) const;
 };
 
@@ -52,6 +54,8 @@ class Board{
 
         //pick_up(src, dif);
         //pick_dn(dif, dst);
+        bool neighbor(int, int);
+        bool boom(int, int); // 這裡你把 int chess[] 改成 Board & board
 
         Board();
         Board(std::string);
@@ -60,9 +64,5 @@ class Board{
         SpaceConfig const * cfg_spa;
        	Chess chs[32];
 };
-
-bool neighbor(int, int);
-bool boom(int x,int y,Board board); // 這裡你把 int chess[] 改成 Board & board
-bool momentum(int type, int type_opp); // 判斷兩旗子可不可以產生吃的行為
 
 #endif

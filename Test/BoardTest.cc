@@ -108,7 +108,7 @@ namespace {
             EXPECT_TRUE(neighbor(20+j, 24+j));
             EXPECT_TRUE(neighbor(24+j, 28+j));
         }*/
-        
+        Board obj;
         set<set<int> > truepair;
         int pair[3];
         for(int i=0; i<8; i++){
@@ -138,7 +138,7 @@ namespace {
         for(int i = 0; i < 32; i++){
             for(int j = 0 ; j < 32; j++) {
                 pair[0] = i; pair[1] = j;
-                EXPECT_EQ(truepair.count(set<int>(pair, pair+2)), neighbor(i, j));
+                EXPECT_EQ(truepair.count(set<int>(pair, pair+2)), obj.neighbor(i, j));
             }
         }
     }
