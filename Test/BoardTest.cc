@@ -77,4 +77,32 @@ namespace {
         Board obj[2];
         EXPECT_FALSE(std::equal(obj[0].chs, obj[0].chs+32, obj[1].chs));
     }
+
+    TEST(CHESS, STATUS_TRANSFORM) {
+        Chess ac[5];
+        int8_t dif = 0;
+        for(int i=0; i<4; i++){
+            ac[i].stat = i;
+            ac[i].tran(dif);
+            EXPECT_EQ(i, ac[i].stat);
+        }
+        dif = 1;
+        for(int i=0; i<4; i++){
+            ac[i].stat = i;
+            ac[i].tran(dif);
+        }
+        EXPECT_EQ(0, ac[0].stat);
+        EXPECT_EQ(2, ac[1].stat);
+        EXPECT_EQ(3, ac[2].stat);
+        EXPECT_EQ(0, ac[3].stat);
+        dif = -1;
+        for(int i=0; i<4; i++){
+            ac[i].stat = i;
+            ac[i].tran(dif);
+        }
+        EXPECT_EQ(0, ac[0].stat);
+        EXPECT_EQ(0, ac[1].stat);
+        EXPECT_EQ(1, ac[2].stat);
+        EXPECT_EQ(2, ac[3].stat);
+    }
 }

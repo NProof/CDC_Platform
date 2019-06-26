@@ -3,6 +3,18 @@
 #include <algorithm>
 #include <map>
 
+int Chess::tran(int8_t dif){
+    if(stat == 0)
+        return 1;
+    int8_t v = stat + dif;
+    if(0 < v && v < 4){
+        stat = v;
+    }
+    else 
+        stat = 0;
+    return 1;
+}
+
 bool Chess::operator==(const Chess &str) const{
     return this->type == str.type;
 }
