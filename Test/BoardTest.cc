@@ -5,37 +5,44 @@
 
 namespace {
     TEST(CHESS, STATUS_TRANSFORM) {
-        Chess ac[5];
+        Chess * ac[5];
         int8_t dif = 0;
         for(int i=0; i<4; i++){
-            ac[i].stat = i;
-            ac[i].tran(dif);
-            EXPECT_EQ(i, ac[i].stat);
+            ac[i] = new Chess(0, i);
+            ac[i]->tran(dif);
+            EXPECT_EQ(i, ac[i]->stat);
+            delete ac[i];
         }
         dif = 1;
         for(int i=0; i<4; i++){
-            ac[i].stat = i;
-            ac[i].tran(dif);
+            ac[i] = new Chess(0, i);
+            ac[i]->tran(dif);
         }
-        EXPECT_EQ(0, ac[0].stat);
-        EXPECT_EQ(2, ac[1].stat);
-        EXPECT_EQ(3, ac[2].stat);
-        EXPECT_EQ(0, ac[3].stat);
+        EXPECT_EQ(0, ac[0]->stat);
+        EXPECT_EQ(2, ac[1]->stat);
+        EXPECT_EQ(3, ac[2]->stat);
+        EXPECT_EQ(0, ac[3]->stat);
+        for(int i=0; i<4; i++){
+            delete ac[i];
+        }
         dif = -1;
         for(int i=0; i<4; i++){
-            ac[i].stat = i;
-            ac[i].tran(dif);
+            ac[i] = new Chess(0, i);
+            ac[i]->tran(dif);
         }
-        EXPECT_EQ(0, ac[0].stat);
-        EXPECT_EQ(0, ac[1].stat);
-        EXPECT_EQ(1, ac[2].stat);
-        EXPECT_EQ(2, ac[3].stat);
+        EXPECT_EQ(0, ac[0]->stat);
+        EXPECT_EQ(0, ac[1]->stat);
+        EXPECT_EQ(1, ac[2]->stat);
+        EXPECT_EQ(2, ac[3]->stat);
+        for(int i=0; i<4; i++){
+            delete ac[i];
+        }
     }
 
     TEST(CHESS, PICK) {
         Board obj;
-        Chess * ch1 = new Chess();
-        Chess * ch2 = new Chess();
+        Chess * ch1 = new Chess(0, 0);
+        Chess * ch2 = new Chess(1, 0);
         Chess * ptrs[3];
         ptrs[0] = ch1; ptrs[1] = ch2;
         obj.pickDw(1, ch1);

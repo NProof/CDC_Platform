@@ -6,6 +6,10 @@
 //#include <string>
 
 struct Chess{
+    Chess(uint8_t, uint8_t);
+    ~Chess();
+    Chess(const Chess &);
+
     int tran(int8_t dif);
 
     uint8_t stat:2; // 0:unknown, 1:dark, 2:alive, 3:out_board 
@@ -21,7 +25,6 @@ public:
     int pickDw(int, Chess *&);
     int pickUp(int, Chess *&);
 
-    //Chess & indexOf(int);
     std::map<int, Chess &> chs;
 };
 

@@ -2,6 +2,12 @@
 
 #include <map>
 
+Chess::Chess(uint8_t type, uint8_t stat) : type(type), stat(stat) {}
+
+Chess::~Chess(){}
+
+Chess::Chess(const Chess & other) : type(other.type), stat(other.stat) {}
+
 int Chess::tran(int8_t dif){
     if(stat == 0)
         return 1;

@@ -7,9 +7,7 @@ Game::Game(){
     std::random_shuffle(itype, itype + 32);
     board = new Board();
     for(int i = 0; i < 32; i++){
-        Chess * ch = new Chess();
-        ch->stat = 1;
-        ch->type = itype[i];
+        Chess * ch = new Chess(itype[i], 1);
         board->pickDw(i, ch);
     }
 }
@@ -21,9 +19,7 @@ Game::Game(std::string str){
     };
     board = new Board();
     for(int i = 0; i < 32; i++){
-        Chess * ch = new Chess();
-        ch->stat = 1;
-        ch->type = m.at(str[i]);
+        Chess * ch = new Chess(m.at(str[i]), 1);
         board->pickDw(i, ch);
     }
 }
@@ -36,9 +32,7 @@ Game::Game(std::string str, uint32_t dark, uint32_t alive){
     board = new Board();
     uint32_t mask = 0x1;
     for(int i = 0; i < 32; i++){
-        Chess * ch = new Chess();
-        ch->stat = (dark & mask) ? 1 : ((alive & mask) ? 2 : 3);
-        ch->type = m.at(str[i]);
+        Chess * ch = new Chess(m.at(str[i]), (dark & mask) ? 1 : ((alive & mask) ? 2 : 3));
         board->pickDw(i, ch);
         mask <<= 1;
     }
