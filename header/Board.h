@@ -2,7 +2,8 @@
 #define BOARD_H_
 
 #include <cinttypes>
-#include <string>
+#include <map>
+//#include <string>
 
 struct Chess{
     int tran(int8_t dif);
@@ -17,11 +18,11 @@ struct Chess{
 
 class Board{
 public:
-    Board();
-    Board(std::string);
-    Board(std::string, uint32_t, uint32_t);
+    int pickDw(int, Chess *&);
+    int pickUp(int, Chess *&);
 
-    Chess chs[32];
+    //Chess & indexOf(int);
+    std::map<int, Chess &> chs;
 };
 
 #endif

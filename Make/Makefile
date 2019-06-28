@@ -41,7 +41,7 @@ GTEST_LIBS = libgtest.a libgtest_main.a
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = BoardTest
+TESTS = BoardTest GameTest
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -51,6 +51,9 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 # House-keeping build targets.
 
 all : $(GTEST_LIBS) $(TESTS)
+	for test in $(TESTS); do ./$$test; done;
+#	./$(TESTS)
+#	./GameTest
 
 clean :
 	rm -f $(GTEST_LIBS) $(TESTS) *.o
@@ -86,10 +89,23 @@ libgtest_main.a : gtest-all.o gtest_main.o
 Board.o : $(SRC_DIR)/Board.cc $(HEAD_DIR)/Board.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Board.cc
 
+Game.o : $(SRC_DIR)/Game.cc $(HEAD_DIR)/Game.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Game.cc
+
 BoardTest.o : $(USER_DIR)/BoardTest.cc \
-                     $(HEAD_DIR)/Board.h $(GTEST_HEADERS)
+                     $(HEAD_DIR)/Board.h \
+                         $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/BoardTest.cc
 
 BoardTest : Board.o BoardTest.o $(GTEST_LIBS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -L$(GTEST_LIB_DIR) -lgtest_main -lpthread $^ -o $@
+
+GameTest.o : $(USER_DIR)/GameTest.cc \
+                    $(HEAD_DIR)/Game.h \
+                    $(HEAD_DIR)/Board.h \
+                        $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/GameTest.cc
+
+GameTest : Game.o Board.o GameTest.o $(GTEST_LIBS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -L$(GTEST_LIB_DIR) -lgtest_main -lpthread $^ -o $@
 
