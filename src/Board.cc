@@ -28,7 +28,9 @@ bool Chess::operator==(const Chess &str) const{
     return this->chs.at(index);
 }*/
 
-Board::Board() : live(0x0) {}
+Board::Board() {}
+
+Board::~Board() {}
 
 int Board::pickDw(int pos, Chess *& ptr_ch){
     if(this->chs.count(pos)){

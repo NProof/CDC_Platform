@@ -22,6 +22,8 @@ struct Chess{
 class Board{
 public:
     Board();
+    ~Board();
+    Board(const Board &) = delete;
 
     int pickDw(int, Chess *&);
     int pickUp(int, Chess *&);
