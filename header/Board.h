@@ -9,9 +9,9 @@ struct Chess{
     ~Chess();
     Chess(const Chess &);
 
-    int tran(int8_t dif);
+    int flip();
 
-    uint8_t stat:2; // 0:unknown, 1:dark, 2:alive, 3:out_board 
+    uint8_t dark:1; // 0:light, 1:dark
     uint8_t type:4; // index of "XkgmrncpPCNRMGK-", lower case is black chess, upper case is red.
                     // (p > k) & (k > g > m > r > n) & (g > m > r > n > p)
     uint8_t :0;

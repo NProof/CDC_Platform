@@ -10,7 +10,7 @@ namespace {
             int stats[5] = {0,0,0,0};
             int types[17] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
             for(int i = 0; i < 32; i++){
-                stats[obj.board->chs.at(i)->stat]++;
+                stats[obj.board->chs.at(i)->dark]++;
                 types[obj.board->chs.at(i)->type]++;
             }
             EXPECT_EQ(32, stats[1]);
@@ -38,7 +38,7 @@ namespace {
             std::random_shuffle(str.begin(), str.end());
             Game obj(str);
             for(int i = 0; i < 32; i++){
-                EXPECT_EQ(1, obj.board->chs.at(i)->stat);
+                EXPECT_EQ(1, obj.board->chs.at(i)->dark);
                 EXPECT_EQ(str[i], "XkgmrncpPCNRMGK-"[obj.board->chs.at(i)->type]);
 //                EXPECT_EQ(0xffffffff, obj.board->live);
             }
@@ -55,22 +55,29 @@ namespace {
             for(int i = 0; i < 32; i++){
                 tmp = 0x1 << i;
                 istat[i] = dis(gen);
-                if(istat[i] == 1){
+                if(istat[i] == 1){ // dark
                     dark |= tmp;
-                    alive &= ~tmp;
+                    alive |= tmp;
                 }
-                else if(istat[i] == 2){
+                else if(istat[i] == 2){ // light
                     alive |= tmp;
                     dark &= ~tmp;
                 }
-                else{
+                else{ // out board
                     alive &= ~tmp;
                     dark &= ~tmp;
                 }
             }
-            Game obj(str, dark, alive);
+            Game obj(str, alive, dark);
             for(int i = 0; i < 32; i++){
-                EXPECT_EQ(istat[i], obj.board->chs.at(i)->stat);
+                uint8_t v;
+                if(obj.board->chs.count(i)){
+                    if(obj.board->chs.at(i)->dark)
+                        v = 1;
+                    else v = 2;
+                }
+                else v = 3;
+                EXPECT_EQ(istat[i], v);
             }
 //            EXPECT_EQ(dark | alive, obj.board->live);
         }

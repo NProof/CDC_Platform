@@ -2,31 +2,19 @@
 
 #include <map>
 
-Chess::Chess(uint8_t type, uint8_t stat) : type(type), stat(stat) {}
+Chess::Chess(uint8_t type, uint8_t dark = 1) : type(type), dark(dark) {}
 
 Chess::~Chess(){}
 
-Chess::Chess(const Chess & other) : type(other.type), stat(other.stat) {}
+Chess::Chess(const Chess & other) : type(other.type), dark(other.dark) {}
 
-int Chess::tran(int8_t dif){
-    if(stat == 0)
-        return 1;
-    int8_t v = stat + dif;
-    if(0 < v && v < 4){
-        stat = v;
-    }
-    else 
-        stat = 0;
-    return 1;
+int Chess::flip(){
+    dark = dark ? 0 : 1;
 }
 
 bool Chess::operator==(const Chess &str) const{
     return this->type == str.type;
 }
-
-/*Chess & Board::indexOf(int index){
-    return this->chs.at(index);
-}*/
 
 Board::Board() {}
 
