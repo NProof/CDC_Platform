@@ -3,7 +3,6 @@
 
 #include <cinttypes>
 #include <map>
-//#include <string>
 
 struct Chess{
     Chess(uint8_t, uint8_t);
@@ -22,10 +21,13 @@ struct Chess{
 
 class Board{
 public:
+    Board();
+
     int pickDw(int, Chess *&);
     int pickUp(int, Chess *&);
 
-    std::map<int, Chess &> chs;
+//    uint32_t live;
+    std::map<int, Chess *> chs;
 };
 
 #endif

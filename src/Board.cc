@@ -28,16 +28,19 @@ bool Chess::operator==(const Chess &str) const{
     return this->chs.at(index);
 }*/
 
+Board::Board() : live(0x0) {}
+
 int Board::pickDw(int pos, Chess *& ptr_ch){
     if(this->chs.count(pos)){
-        Chess & tmp(*ptr_ch);
-        ptr_ch = &this->chs.at(pos);
+        Chess * tmp(ptr_ch);
+        ptr_ch = this->chs.at(pos);
         this->chs.erase(pos);
-        this->chs.insert(std::pair<int, Chess &>(pos, tmp));
+        this->chs.insert(std::pair<int, Chess *>(pos, tmp));
         return 1;
     }
     else{
-        this->chs.insert(std::pair<int, Chess &>(pos, *ptr_ch));
+//        this->live |= (0x1 << pos);
+        this->chs.insert(std::pair<int, Chess *>(pos, ptr_ch));
         ptr_ch = nullptr;
         return 0;
     }
@@ -45,15 +48,16 @@ int Board::pickDw(int pos, Chess *& ptr_ch){
 
 int Board::pickUp(int pos, Chess *& ptr_ch){
     if(ptr_ch == nullptr){
-        ptr_ch = &this->chs.at(pos);
+//        this->live &= (0x1 << pos);
+        ptr_ch = this->chs.at(pos);
         this->chs.erase(pos);
         return 0;
     }
     else{
-        Chess & tmp = *ptr_ch;
-        ptr_ch = &this->chs.at(pos);
+        Chess * tmp = ptr_ch;
+        ptr_ch = this->chs.at(pos);
         this->chs.erase(pos);
-        this->chs.insert(std::pair<int, Chess &>(pos, tmp));
+        this->chs.insert(std::pair<int, Chess *>(pos, tmp));
         return 1;
     }
 }

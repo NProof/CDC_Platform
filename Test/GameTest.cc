@@ -10,8 +10,8 @@ namespace {
             int stats[5] = {0,0,0,0};
             int types[17] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
             for(int i = 0; i < 32; i++){
-                stats[obj.board->chs.at(i).stat]++;
-                types[obj.board->chs.at(i).type]++;
+                stats[obj.board->chs.at(i)->stat]++;
+                types[obj.board->chs.at(i)->type]++;
             }
             EXPECT_EQ(32, stats[1]);
             EXPECT_EQ(1, types[1]);
@@ -28,6 +28,7 @@ namespace {
             EXPECT_EQ(2, types[12]);
             EXPECT_EQ(2, types[13]);
             EXPECT_EQ(1, types[14]);
+//            EXPECT_EQ(0xffffffff, obj.board->live);
         }
     }
 
@@ -37,8 +38,9 @@ namespace {
             std::random_shuffle(str.begin(), str.end());
             Game obj(str);
             for(int i = 0; i < 32; i++){
-                EXPECT_EQ(1, obj.board->chs.at(i).stat);
-                EXPECT_EQ(str[i], "XkgmrncpPCNRMGK-"[obj.board->chs.at(i).type]);
+                EXPECT_EQ(1, obj.board->chs.at(i)->stat);
+                EXPECT_EQ(str[i], "XkgmrncpPCNRMGK-"[obj.board->chs.at(i)->type]);
+//                EXPECT_EQ(0xffffffff, obj.board->live);
             }
         }
     }
@@ -68,13 +70,25 @@ namespace {
             }
             Game obj(str, dark, alive);
             for(int i = 0; i < 32; i++){
-                EXPECT_EQ(istat[i], obj.board->chs.at(i).stat);
+                EXPECT_EQ(istat[i], obj.board->chs.at(i)->stat);
             }
+//            EXPECT_EQ(dark | alive, obj.board->live);
         }
     }
-/*
+
+    template <typename Map>
+        bool key_compare (Map const &lhs, Map const &rhs) {
+
+        auto pred = [] (decltype(*lhs.begin()) a, decltype(a) b)
+                       { return a.second == b.second; };
+
+        return lhs.size() == rhs.size()
+            && std::equal(lhs.begin(), lhs.end(), rhs.begin(), pred);
+    }
+
     TEST(GAME, UNIQUENESS) {
-        Game obj[2];
-        EXPECT_FALSE(std::equal(obj[0].board->chs, obj[0].board->chs+32, obj[1].board->chs));
-    }*/
+        Game * obj[2] = {new Game(), new Game()};
+        EXPECT_FALSE((key_compare<std::map<int, Chess *> >(obj[0]->board->chs, obj[1]->board->chs)));
+        delete obj[0]; delete obj[1];
+    }
 }
