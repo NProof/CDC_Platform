@@ -8,7 +8,9 @@ std::string Game::randomStrBoard(){
     return str;
 }
 
-Game::Game(std::string str, uint32_t alive, uint32_t dark) : turn(0) {
+Game::Game(Player & ply1, Player & ply2, std::string str, uint32_t alive, uint32_t dark) : turn(0) {
+    this->players[0] = &ply1;
+    this->players[1] = &ply2;
     std::map<char, uint8_t> m = {
         {'X',0}, {'k',1}, {'g',2}, {'m',3}, {'r',4}, {'n',5}, {'c',6}, {'p',7},
         {'P',8}, {'C',9}, {'N',10}, {'R',11}, {'M',12}, {'G',13}, {'K',14}, {'-',15}
