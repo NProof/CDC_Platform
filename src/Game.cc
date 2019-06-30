@@ -2,14 +2,10 @@
 #include <iostream>
 #include <algorithm>
 
-Game::Game() : turn(0) {
-    uint8_t itype[] = {1,2,2,3,3,4,4,5,5,6,6,7,7,7,7,7,8,8,8,8,8,9,9,10,10,11,11,12,12,13,13,14};
-    std::random_shuffle(itype, itype + 32);
-    board = new Board();
-    for(int i = 0; i < 32; i++){
-        Chess * ch = new Chess(itype[i], 1);
-        board->pickDw(i, ch);
-    }
+std::string Game::randomStrBoard(){
+    std::string str("kggmmrrnnccpppppPPPPPCCNNRRMMGGK");
+    std::random_shuffle(str.begin(), str.end());
+    return str;
 }
 
 Game::Game(std::string str, uint32_t alive, uint32_t dark) : turn(0) {

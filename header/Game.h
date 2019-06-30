@@ -17,9 +17,8 @@ struct StateG{
 
 class Game{
 public:
-    Game();
-//    Game(std::string);
-    Game(std::string, uint32_t = 0xffffffff, uint32_t = 0xffffffff);
+    //Game();
+    Game(std::string = Game::randomStrBoard(), uint32_t = 0xffffffff, uint32_t = 0xffffffff);
     ~Game();
     Game(const Game &) = delete;
   //makeIns(Ins &);
@@ -28,6 +27,7 @@ public:
     int turn;
     int col[3] = {0, 0};
     Board * board;
+    static std::string randomStrBoard();
 };
 
 #endif
