@@ -4,6 +4,7 @@
 #include "Board.h"
 //#include "Player.h"
 #include <string>
+#include <stack>
 
 //class Player;
 
@@ -33,6 +34,8 @@ public:
     int turn;
     int col[3] = {0, 0};
     Board * board;
+    std::stack<Chess *> s_ch;
+    
     static std::string randomStrBoard();
 };
 

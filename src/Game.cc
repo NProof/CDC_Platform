@@ -33,6 +33,10 @@ Game::~Game(){
     /*for(auto it : this->stat_p){
         left(*it.first);
     }*/
+    while(!this->s_ch.empty()){
+        delete this->s_ch.top();
+        this->s_ch.pop();
+    }
     if(board->chs.size()){
         for(auto it = board->chs.begin(); it != board->chs.end(); it++){
             delete it->second;
@@ -63,6 +67,7 @@ int Game::makeIns(Ins ins){
         else{
             this->board->pickUp(ins.src, tmp);
             this->board->pickDw(ins.dst, tmp);
+            this->s_ch.push(tmp);
             return 4;
         }
     }
