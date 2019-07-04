@@ -37,6 +37,32 @@ Game::~Game(){
     delete board;
 }
 
+/*int Game::makeIns(Ins & ins){
+    Chess & actor = this->board->indexOf(ins.src);
+    if(ins.src == ins.dst){
+        if(!actor.dark){
+            std::cerr << "actor isn't dark" << std::endl;
+            exit(-1);
+        }
+        actor.flip();
+        return 1;
+    }
+    else{
+        auto it = this->board->chs.find(ins.dst);
+        Chess * tmp(nullptr);
+        if(it == this->board->chs.end()){
+            this->board->pickUp(ins.src, tmp);
+            this->board->pickDw(ins.dst, tmp);
+            return 3;
+        }
+        else{
+            this->board->pickUp(ins.src, tmp);
+            this->board->pickDw(ins.dst, tmp);
+            return 4;
+        }
+    }
+}*/
+
 /*void Game::join(Player & ply){
     StateG * s = new StateG();
     this->stat_p.insert(std::pair<Player *, StateG &>(&ply, *s));

@@ -5,10 +5,11 @@
 //#include "Player.h"
 #include <string>
 
-class Player;
+//class Player;
 
 struct Ins{
-
+    // Player * ply;
+    int src, dst;
 };
 
 struct StateG{
@@ -20,7 +21,8 @@ public:
     Game(std::string = Game::randomStrBoard(), uint32_t = 0xffffffff, uint32_t = 0xffffffff);
     ~Game();
     Game(const Game &) = delete;
-  //makeIns(Ins &);
+
+    //int makeIns(Ins &);
 //private:
     //void join(Player &);
     //void left(Player &);
