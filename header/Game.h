@@ -15,7 +15,7 @@ struct Ins{
     int src, dst;
 };
 
-struct StateG{
+struct StatePly{
     int col;
 };
 
@@ -30,9 +30,7 @@ public:
     //void join(Player &);
     //void left(Player &);
 
-    //std::map<Player *, StateG &> stat_p;
-    int turn;
-    int col[3] = {0, 0};
+    //std::map<Player *, StatePly &> stat_p;
     Board * board;
     std::stack<Chess *> s_ch;
     
