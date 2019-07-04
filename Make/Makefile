@@ -92,6 +92,9 @@ Board.o : $(SRC_DIR)/Board.cc $(HEAD_DIR)/Board.h $(GTEST_HEADERS)
 Game.o : $(SRC_DIR)/Game.cc $(HEAD_DIR)/Game.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Game.cc
 
+# Player.o : $(SRC_DIR)/Player.cc $(HEAD_DIR)/Player.h $(GTEST_HEADERS)
+# 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/Player.cc
+
 BoardTest.o : $(USER_DIR)/BoardTest.cc \
                      $(HEAD_DIR)/Board.h \
                          $(GTEST_HEADERS)
@@ -103,6 +106,7 @@ BoardTest : Board.o BoardTest.o $(GTEST_LIBS)
 GameTest.o : $(USER_DIR)/GameTest.cc \
                     $(HEAD_DIR)/Game.h \
                     $(HEAD_DIR)/Board.h \
+#                     $(HEAD_DIR)/Player.h \
                         $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/GameTest.cc
 

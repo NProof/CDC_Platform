@@ -8,9 +8,7 @@ std::string Game::randomStrBoard(){
     return str;
 }
 
-Game::Game(Player & ply1, Player & ply2, std::string str, uint32_t alive, uint32_t dark) : turn(0) {
-    this->players[0] = &ply1;
-    this->players[1] = &ply2;
+Game::Game(std::string str, uint32_t alive, uint32_t dark) : turn(0) {
     std::map<char, uint8_t> m = {
         {'X',0}, {'k',1}, {'g',2}, {'m',3}, {'r',4}, {'n',5}, {'c',6}, {'p',7},
         {'P',8}, {'C',9}, {'N',10}, {'R',11}, {'M',12}, {'G',13}, {'K',14}, {'-',15}
@@ -27,6 +25,9 @@ Game::Game(Player & ply1, Player & ply2, std::string str, uint32_t alive, uint32
 }
 
 Game::~Game(){
+    /*for(auto it : this->stat_p){
+        left(*it.first);
+    }*/
     if(board->chs.size()){
         for(auto it = board->chs.begin(); it != board->chs.end(); it++){
             delete it->second;
@@ -35,3 +36,16 @@ Game::~Game(){
     }
     delete board;
 }
+
+/*void Game::join(Player & ply){
+    StateG * s = new StateG();
+    this->stat_p.insert(std::pair<Player *, StateG &>(&ply, *s));
+    ply.m_state.insert(std::pair<Game *, StateG *>(this, s));
+}*/
+
+/*void Game::left(Player & ply){
+    StateG * tmp(&this->stat_p.at(&ply));
+    ply.m_state.erase(this);
+    this->stat_p.erase(&ply);
+    delete tmp;
+}*/

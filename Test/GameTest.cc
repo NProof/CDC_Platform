@@ -4,17 +4,18 @@
 #include <algorithm>
 
 namespace {
-    TEST(GAME, PLAYERS){
+    /*TEST(GAME, PLAYERS){
         Player p1, p2;
-        Game game(p1, p2);
-        EXPECT_EQ(&p1, game.players[0]);
-        EXPECT_EQ(&p2, game.players[1]);
-    }
+        Game game;
+        game.join(p1);
+        game.join(p2);
+        EXPECT_EQ(1, game.stat_p.count(&p1));
+        EXPECT_EQ(1, game.stat_p.count(&p2));
+    }*/
 
     TEST(GAME, CONSTRCTOR) {
         for(int t = 0; t < 50; t++){
-            Player p1, p2;
-            Game obj(p1, p2);
+            Game obj;
             int stats[5] = {0,0,0,0};
             int types[17] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
             for(int i = 0; i < 32; i++){
@@ -43,9 +44,8 @@ namespace {
     TEST(GAME, STR_CONSTRCTOR) {
         std::string str = "kggmmrrnnccpppppKGMRNCPGMRNCPPPP";
         for(int t = 0; t < 50; t++){
-            Player p1, p2;
             std::random_shuffle(str.begin(), str.end());
-            Game obj(p1, p2, str);
+            Game obj(str);
             for(int i = 0; i < 32; i++){
                 EXPECT_EQ(1, obj.board->chs.at(i)->dark);
                 EXPECT_EQ(str[i], "XkgmrncpPCNRMGK-"[obj.board->chs.at(i)->type]);
@@ -77,8 +77,7 @@ namespace {
                     dark &= ~tmp;
                 }
             }
-            Player p1, p2;
-            Game obj(p1, p2, str, alive, dark);
+            Game obj(str, alive, dark);
             for(int i = 0; i < 32; i++){
                 uint8_t v;
                 if(obj.board->chs.count(i)){
@@ -104,8 +103,7 @@ namespace {
     }
 
     TEST(GAME, UNIQUENESS) {
-        Player p1, p2;
-        Game * obj[2] = {new Game(p1, p2), new Game(p1, p2)};
+        Game * obj[2] = {new Game(), new Game()};
         EXPECT_FALSE((key_compare<std::map<int, Chess *> >(obj[0]->board->chs, obj[1]->board->chs)));
         delete obj[0]; delete obj[1];
     }
