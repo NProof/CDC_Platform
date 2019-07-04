@@ -107,4 +107,140 @@ namespace {
         EXPECT_FALSE((key_compare<std::map<int, Chess *> >(obj[0]->board->chs, obj[1]->board->chs)));
         delete obj[0]; delete obj[1];
     }
+
+    TEST(INS, CTR){
+        std::map<int, std::string> smap;
+        for(int i=0; i<32; i++){
+            int x=i/8, y=i%8;
+            char tmp[3] = {char(int('a')+x), char(int('1')+y)};
+            smap[i] = std::string(tmp);
+        }
+        for(int i=0; i<32; i++){
+            for(int j=0; j<32; j++){
+                Ins ins(smap.at(i), smap.at(j));
+                EXPECT_EQ(i, ins.src);
+                EXPECT_EQ(j, ins.dst);
+            }
+        }
+    }
+
+    TEST(RUN, STEP1){
+        Game game("pngpRRpnMGPkCPpPCccmNPPgMNKprrmG");
+        game.makeIns(Ins("c7", "c7"));
+        game.makeIns(Ins("b5", "b5"));
+        game.makeIns(Ins("c4", "c4"));
+        game.makeIns(Ins("a3", "a3"));
+        game.makeIns(Ins("d3", "d3"));
+        game.makeIns(Ins("a6", "a6"));
+        game.makeIns(Ins("d8", "d8"));
+        game.makeIns(Ins("d1", "d1"));
+        game.makeIns(Ins("b1", "b1"));
+        game.makeIns(Ins("b8", "b8"));
+        game.makeIns(Ins("c2", "c2"));
+        game.makeIns(Ins("c5", "c5"));
+        game.makeIns(Ins("b3", "b3"));
+        game.makeIns(Ins("c4", "c5"));
+        game.makeIns(Ins("b4", "b4"));
+        game.makeIns(Ins("a3", "b3"));
+        game.makeIns(Ins("b5", "b3"));
+        game.makeIns(Ins("b4", "b3"));
+        game.makeIns(Ins("d2", "d2"));
+        game.makeIns(Ins("b2", "b2"));
+        game.makeIns(Ins("b2", "c2"));
+        game.makeIns(Ins("b3", "b2"));
+        game.makeIns(Ins("c3", "c3"));
+        game.makeIns(Ins("b2", "c2"));
+        game.makeIns(Ins("b1", "b2"));
+        game.makeIns(Ins("c3", "c4"));
+        game.makeIns(Ins("b2", "b3"));
+        game.makeIns(Ins("c5", "b5"));
+        game.makeIns(Ins("d7", "d7"));
+        game.makeIns(Ins("d7", "c7"));
+        game.makeIns(Ins("d8", "d7"));
+        game.makeIns(Ins("b7", "b7"));
+        game.makeIns(Ins("b8", "b7"));
+        game.makeIns(Ins("c7", "b7"));
+        game.makeIns(Ins("d6", "d6"));
+        game.makeIns(Ins("a7", "a7"));
+        game.makeIns(Ins("d7", "d6"));
+        game.makeIns(Ins("a4", "a4"));
+        game.makeIns(Ins("a2", "a2"));
+        game.makeIns(Ins("b7", "b8"));
+        game.makeIns(Ins("d5", "d5"));
+        game.makeIns(Ins("a7", "b7"));
+        game.makeIns(Ins("d6", "d5"));
+        game.makeIns(Ins("c6", "c6"));
+        game.makeIns(Ins("d5", "c5"));
+        game.makeIns(Ins("c4", "c6"));
+        game.makeIns(Ins("c5", "c6"));
+        game.makeIns(Ins("c8", "c8"));
+        game.makeIns(Ins("c1", "c1"));
+        game.makeIns(Ins("c2", "c1"));
+        game.makeIns(Ins("d3", "c3"));
+        game.makeIns(Ins("d4", "d4"));
+        game.makeIns(Ins("c6", "c5"));
+        game.makeIns(Ins("a4", "b4"));
+        game.makeIns(Ins("b3", "b4"));
+        game.makeIns(Ins("b5", "b4"));
+        game.makeIns(Ins("c5", "c4"));
+        game.makeIns(Ins("d4", "d5"));
+        game.makeIns(Ins("c4", "b4"));
+        game.makeIns(Ins("c8", "c7"));
+        game.makeIns(Ins("b4", "b5"));
+        game.makeIns(Ins("c7", "c6"));
+        game.makeIns(Ins("d2", "d3"));
+        game.makeIns(Ins("c1", "d1"));
+        game.makeIns(Ins("c3", "c2"));
+        game.makeIns(Ins("a1", "a1"));
+        game.makeIns(Ins("d3", "c3"));
+        game.makeIns(Ins("a1", "b1"));
+        game.makeIns(Ins("c3", "b3"));
+        game.makeIns(Ins("d5", "d4"));
+        game.makeIns(Ins("b5", "b4"));
+        game.makeIns(Ins("c6", "c5"));
+        game.makeIns(Ins("c2", "c3"));
+        game.makeIns(Ins("d1", "d2"));
+        game.makeIns(Ins("b4", "c4"));
+        game.makeIns(Ins("c5", "c4"));
+        game.makeIns(Ins("c3", "c4"));
+        game.makeIns(Ins("d4", "c4"));
+        game.makeIns(Ins("b6", "b6"));
+        game.makeIns(Ins("b7", "b6"));
+        game.makeIns(Ins("a6", "b6"));
+        game.makeIns(Ins("b8", "b7"));
+        game.makeIns(Ins("b6", "b5"));
+        game.makeIns(Ins("b7", "b6"));
+        game.makeIns(Ins("b5", "c5"));
+        game.makeIns(Ins("b6", "b5"));
+        game.makeIns(Ins("c5", "c4"));
+        game.makeIns(Ins("b5", "b4"));
+        game.makeIns(Ins("b3", "a3"));
+        game.makeIns(Ins("a2", "a3"));
+        game.makeIns(Ins("c4", "c5"));
+        game.makeIns(Ins("a5", "a5"));
+        game.makeIns(Ins("c5", "c6"));
+        game.makeIns(Ins("d2", "d3"));
+        game.makeIns(Ins("c6", "d6"));
+        game.makeIns(Ins("d3", "d4"));
+        game.makeIns(Ins("a5", "a6"));
+        game.makeIns(Ins("b4", "b5"));
+        game.makeIns(Ins("d6", "d7"));
+        game.makeIns(Ins("d4", "d5"));
+        game.makeIns(Ins("d7", "c7"));
+        game.makeIns(Ins("d5", "d6"));
+        game.makeIns(Ins("a6", "a7"));
+        game.makeIns(Ins("b5", "b6"));
+        game.makeIns(Ins("c7", "c8"));
+        game.makeIns(Ins("d6", "c6"));
+        game.makeIns(Ins("a8", "a8"));
+        game.makeIns(Ins("b6", "a6"));
+        game.makeIns(Ins("a7", "a8"));
+        game.makeIns(Ins("c6", "c7"));
+        game.makeIns(Ins("c8", "b8"));
+        game.makeIns(Ins("a6", "a7"));
+        game.makeIns(Ins("b8", "b7"));
+        game.makeIns(Ins("c7", "b7"));
+        game.makeIns(Ins("a8", "b8"));
+        game.makeIns(Ins("b7", "b8"));
+    }
 }

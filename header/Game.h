@@ -24,7 +24,7 @@ public:
     ~Game();
     Game(const Game &) = delete;
 
-    //int makeIns(Ins &);
+    int makeIns(Ins);
 //private:
     //void join(Player &);
     //void left(Player &);

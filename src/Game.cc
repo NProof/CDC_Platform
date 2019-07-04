@@ -42,7 +42,7 @@ Game::~Game(){
     delete board;
 }
 
-/*int Game::makeIns(Ins & ins){
+int Game::makeIns(Ins ins){
     Chess & actor = this->board->indexOf(ins.src);
     if(ins.src == ins.dst){
         if(!actor.dark){
@@ -66,7 +66,7 @@ Game::~Game(){
             return 4;
         }
     }
-}*/
+}
 
 /*void Game::join(Player & ply){
     StateG * s = new StateG();
