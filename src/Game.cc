@@ -2,6 +2,11 @@
 #include <iostream>
 #include <algorithm>
 
+Ins::Ins(std::string s_src, std::string s_dst){
+    this->src = 8*(s_src[0]-'a')+(s_src[1]-'1');
+    this->dst = 8*(s_dst[0]-'a')+(s_dst[1]-'1');
+}
+
 std::string Game::randomStrBoard(){
     std::string str("kggmmrrnnccpppppPPPPPCCNNRRMMGGK");
     std::random_shuffle(str.begin(), str.end());

@@ -8,6 +8,8 @@
 //class Player;
 
 struct Ins{
+    Ins(std::string s_src, std::string s_dst);
+
     // Player * ply;
     int src, dst;
 };
